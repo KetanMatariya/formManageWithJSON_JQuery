@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Json Management</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+  </script>
+  <style type="text/css">
+    button:disabled {
+      border: none;
+      background-color: rgba(0, 128, 255, 0.5);
+      color: #fff;
+      cursor: not-allowed;
+    }
+
+    .form-pagebreak {
+      display: flex;
+      justify-content: end;
+    }
+
+    @media print {
+      .form-section {
+        display: inline !important
+      }
+
+      .form-pagebreak {
+        display: none !important
+      }
+
+      .form-section-closed {
+        height: auto !important
+      }
+
+      .page-section {
+        position: initial !important
+      }
+    }
+  </style>
+  <link type="text/css" rel="stylesheet"
+    href="https://cdn01.jotfor.ms/themes/CSS/5e6b428acc8c4e222d1beb91.css?v=3.3.41296" />
+  <link type="text/css" rel="stylesheet"
+    href="https://cdn02.jotfor.ms/css/styles/payment/payment_styles.css?3.3.41296" />
+  <link type="text/css" rel="stylesheet"
+    href="https://cdn03.jotfor.ms/css/styles/payment/payment_feature.css?3.3.41296" />
+  <style type="text/css" id="form-designer-style">
+    /* Injected CSS Code */
+    /*PREFERENCES STYLE*/
+    .form-all {
+      font-family: Inter, sans-serif;
+    }
+
+    .form-label.form-label-auto {
+
+      display: block;
+      float: none;
+      text-align: left;
+      width: 100%;
+
+    }
+
+    .form-line {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .form-all {
+      max-width: 752px;
+      width: 100%;
+    }
+
+    .form-label.form-label-left,
+    .form-label.form-label-right,
+    .form-label.form-label-left.form-label-auto,
+    .form-label.form-label-right.form-label-auto {
+      width: 230px;
+    }
+
+    .form-all {
+      font-size: 16px
+    }
+
+    .supernova .form-all,
+    .form-all {
+      background-color: #fff;
+    }
+
+    .form-all {
+      color: #2C3345;
+    }
+
+    .form-header-group .form-header {
+      color: #2C3345;
+    }
+
+    .form-header-group .form-subHeader {
+      color: #2C3345;
+    }
+
+    .form-label-top,
+    .form-label-left,
+    .form-label-right,
+    .form-html,
+    .form-checkbox-item label,
+    .form-radio-item label,
+    span.FITB .qb-checkbox-label,
+    span.FITB .qb-radiobox-label,
+    span.FITB .form-radio label,
+    span.FITB .form-checkbox label,
+    [data-blotid][data-type=checkbox] [data-labelid],
+    [data-blotid][data-type=radiobox] [data-labelid],
+    span.FITB-inptCont[data-type=checkbox] label,
+    span.FITB-inptCont[data-type=radiobox] label {
+      color: #2C3345;
+    }
+
+    .form-sub-label {
+      color: #464d5f;
+    }
+
+    .supernova,
+    .supernova body {
+      background-color: #f3f3fe;
+    }
+
+    .form-textbox,
+    .form-textarea,
+    .form-dropdown,
+    .form-radio-other-input,
+    .form-checkbox-other-input,
+    .form-captcha input,
+    .form-spinner input {
+      background-color: #fff;
+    }
+
+    .supernova {
+      background-image: none;
+    }
+
+    #stage {
+      background-image: none;
+    }
+
+    .form-all {
+      background-image: none;
+    }
+
+    .form-all:before {
+      content: none;
+    }
+
+    .form-all {
+      margin-top: 72px;
+    }
+
+    input[type=checkbox],
+    input[type=radio] {
+      margin: 4px 6px 0px !important;
+    }
+  </style>
+
+
+
+  <script>
+    $(document).ready(function () {
+      let formObj = {
+        'id': 'form1',
+        'type': 'form',
+        'title': '',
+        'class': '',
+        'fieldExist': false,
+        'header': {
+          'id': 'title1',
+          'title': 'Triage Mock-up',
+          'type': 'h1',
+          'parent': '#form1',
+          'fieldExist': false
+        },
+        'footer': {
+          'id': 'footer1',
+          'type': 'button',
+          'parent': '#form1',
+          'class': 'btn btn-primary',
+          'title': 'Next',
+          'fieldExist': false
+        },
+        'content': {
+          'id': 'Q1',
+          'qText': 'Q1. Are you a Singaporean Citizen/Permanent Resident?',
+          'type': 'input',
+          'field': 'radio',
+          'label': [
+            'Yes',
+            'No'
+          ],
+          'fieldExist': true,
+          'fieldIds': ['r_0_0', 'r_0_1'],
+          'name': 'Q1',
+          'class': '',
+          'parCommon': '#form1',
+          'parent': '#Q1',
+          'action': [{
+            'event': 'click',
+            'click': {
+              'condition': 'No',
+              'element': {
+                'id': 'Q2',
+                'qText': 'Q2. Are you on a Work Permit?',
+                'type': 'input',
+                'field': 'radio',
+                'label': [
+                  'Yes',
+                  'No'
+                ],
+                'fieldExist': true,
+                'fieldIds': ['r_1_0', 'r_1_1'],
+                'name': 'Q2',
+                'class': '',
+                'parCommon': '#form1',
+                'parent': '#Q2',
+                'action': [{
+                    'event': 'click',
+                    'click': {
+                      'condition': 'Yes',
+                      'element': {
+                        'id': 'Q5',
+                        'qText': 'Q5. Problem(s) I need help with:',
+                        'type': 'input',
+                        'field': 'checkbox',
+                        'label': [
+                          "A. Boss didn't pay salary",
+                          "B. Injured at work",
+                          "C. Criminal case (police case / arrested / charged in court)",
+                          "Other"
+                        ],
+                        'fieldExist': true,
+                        'fieldIds': ['r_2_0', 'r_2_1', 'r_2_2', 'r_2_3'],
+                        'name': 'Q5',
+                        'class': '',
+                        'parCommon': '#form1',
+                        'parent': '#Q5',
+                        'action': [{
+                          'event': 'click',
+                          'click': {
+                            'condition': '',
+                            'element': {
+
+                            }
+                          }
+                        }]
+                      }
+                    }
+                  },
+                  {
+                    'event': 'click',
+                    'click': {
+                      'condition': 'No',
+                      'element': {
+                        'id': 'Q4',
+                        'qText': 'Q4. Problem(s) I need help with:',
+                        'type': 'input',
+                        'field': 'checkbox',
+                        'label': [
+                          "A. Cannot pay debts (bankruptcy)",
+                          "B. Criminal (e.g., police investigating me, facing criminal charge)",
+                          "C. Employment (e.g., problems with employment contract, losing my job)",
+                          "D. Estate matters (e.g., wills, deputyship, lasting power of attorney)",
+                          "E. Family (e.g., divorce, problems with spouse)",
+                          "F. Injury (e.g., workplace accident, traffic accident)",
+                          "G. Harrasment (e.g. shouting, stalking, threats, throwing things)",
+                          "H. Neighbour problems",
+                          "I. Online Harms (e.g., online falsehoods, release of non-consensual intimate images, revealing of personal information online)",
+                          "J. Something wrong with what I bought",
+                          "Other"
+                        ],
+                        'fieldExist': true,
+                        'fieldIds': ['r_3_0', 'r_3_1', 'r_3_2', 'r_3_3', 'r_3_4', 'r_3_5', 'r_3_6', 'r_3_7',
+                          'r_3_8', 'r_3_9', 'r_3_10'
+                        ],
+                        'name': 'Q4',
+                        'class': '',
+                        'parCommon': '#form1',
+                        'parent': '#Q4',
+                        'action': [{
+                          'event': 'click',
+                          'click': {
+                            'condition': '',
+                            'element': {
+
+                            }
+                          }
+                        }]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }]
+        },
+        'parent': '#formContainer'
+      }
+
+      createElement(formObj);
+
+      function createElement(data) {
+        if (data) {
+          if (!data.fieldExist) {
+            let el = $(`<${data.type} id='${data.id}' class='${data.class}'>${data.title}</${data.type}>`);
+            console.log("please check function calling", el, data.parent, $(data.parent))
+            $(data.parent).append(el[0]);
+          } else {
+            let par = $(`<div id='${data.id}'></div>`)
+            $(data.parCommon).append(par[0]);
+            let q = $(`<p>${data.qText}</p>`)
+            $(data.parent).append(q[0]);
+            for (let i = 0; i < data.label.length; i++) {
+              let el = $(
+                `<${data.type} type='${data.field}' id='${data.fieldIds[i]}' class='${data.class}' value='${data.label[i]}' name='${data.name}'/>&nbsp;`
+              );
+              let label = $(`<label>${data.label[i]}</label>`)
+              let newLine = $(`<br>`)
+              $(data.parent).append(el[0]);
+              $(data.parent).append(label[0]);
+              $(data.parent).append(newLine[0]);
+              inputActionHandle(data.action, data.fieldIds[i], data.name);
+            }
+          }
+          // el.attributes('id',data.id);
+          createElement(data.header);
+          createElement(data.content);
+          // createElement(data.footer);
+        } else {
+          console.log("else ....")
+        }
+      }
+
+      function inputActionHandle(actions, id, name) {
+        for (let action of actions) {
+
+          $('#' + id).on(`${action.event}`, function () {
+            console.log("check condition : ", $(this).is(':checked'), id)
+            let val = getCheckedValue(`input[name="${name}"]:checked`);
+            if (val[0] == action[action.event].condition) {
+              createElement(action[action.event].element);
+            } else {
+              removeElement(action[action.event].element.id)
+            }
+          })
+
+        }
+      }
+
+      function removeElement(id) {
+        console.log("test remove")
+        $('#' + id).remove();
+      }
+
+      function getCheckedValue(checkbox) {
+        return $.map($(checkbox), function (c) {
+          return c.value;
+        });
+      }
+    })
+  </script>
+
+</head>
+
+<body>
+  <div id="formContainer">
+  </div>
+</body>
+
+</html>
